@@ -1,0 +1,56 @@
+What is Nodejs?
+=>Node.js is a open source JS runtime that allow us to execute javascript on the server side.
+
+
+what is runtime?
+=>runtime is where javascript is executed.
+
+-->Every browser has their seperate engines to execute javascript code.
+Google:V8 engines
+Morzilla FireFox:Spider monkey 
+Safari:javascript Core
+
+How node.js run time is created?
+back in the the days google created v8 engine to run js code in their browser.
+but to run in the local machines there was no run time. 
+Some smart developers,took the v8 engine out from the google and added some functionalities to run in our local pc's.
+So,thats how a node.JS run time is created.
+
+What is bun?
+Bun folks are creating a new run time without using v8 engine.
+They are writing in a low level programming language called ZIG. 
+
+what will be there in package.JSON file?
+{
+    "Name":"Name of the propject"
+    "version":"1.0.0" // if you add or update your code base and deploy, then these are very useful
+    "main":index.js // this is the file where u are writing  your js code
+    scripts:{
+        dev:"node index.js"
+        //this is one of the important thing in this file where and how our js code will be executed
+        We can give any name instead of dev but for all understanding we can use simple cs codes.
+    }
+    "keywords":[] //These all fields  will be mandatory when you are depolying  in npm registry.
+    "author":"",
+    "lisence":"",
+    "description:"",
+}
+
+
+What is NPM?
+=>node pacakage manager
+Npm is used to manage all the external dependencies,libraries.
+(chalk is the first external dependancy).
+"chalk": "^5.3.0",
+
+WHAT THE NUMBER OVER TOP SAYS?
+=>MAJOR.MINOR.PATCH
+MAJOR:
+If you have any big changes or added a new functions completely.
+ex:ios versions
+MINOR:
+If you have any small changes or added any thing small to ur codebase.
+PATCH:
+Fixing bugs in your  current version.
+
+^(This symbol gives u the latest version of the dependancy).
