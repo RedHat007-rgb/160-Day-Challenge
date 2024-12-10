@@ -76,13 +76,81 @@ program
 
 program.command('todo')
   .description('add/delete the todo')
-  .argument(' add <file> <title> [description] <done>', 'todo to add/delete')
+  .argument('<file>', 'File to write the todo')
+  .argument('<title>', 'Title of the todo')
+  .argument('[description]', 'Description of the todo', '')
+  .argument('<done>', 'Done status of the todo')
   .option('-t','title')
   .option('-d', 'description')
   .option('-do','done')
-  .action(function(title,description,done){
-    const p=fs.readFileSync()
-  });
+  .action(function(file,title,description,done){
+          console.log(title);
+          console.log(description);
+          console.log(done);
+          let todo= {
+            title:title,
+            description:description,
+            done:done
+          }
+          const todoString = JSON.stringify(todo, null, 2); // Pretty print with 2 spaces
+          let s = JSON.stringify({
+            title:title,
+            description:description,
+            done:done
+          }, null, 2);
+              let x=fs.appendFile(file,s,function(err){
+                if(err){
+                  console.log("file not found")
+                }
+                else{
+                 
+                  console.log("file has been written successfully");
+                }
+              })
+        }
+        );
+  
     
 
 program.parse();
+
+
+
+// const fs = require("fs");
+// const { Command } = require('commander');
+// const program = new Command();
+
+// program
+//   .name('todo CLI')
+//   .description('CLI to add the todo')
+//   .version('0.8.0');
+
+// program.command('todo')
+//   .description('add/delete the todo')
+//   .argument('<file>', 'File to write the todo')
+//   .argument('<title>', 'Title of the todo')
+//   .argument('[description]', 'Description of the todo', '')
+//   .argument('<done>', 'Done status of the todo')
+//   .action((file, title, description, done) => {
+//     // Create the todo object
+//     const todo = {
+//       title: title,
+//       description: description,
+//       done: done
+//     };
+
+//     // Convert the todo object to a JSON string
+//     const todoString = JSON.stringify(todo, null, 2); // Pretty print with 2 spaces
+
+//     // Write the JSON string to the file
+//     fs.writeFile(file, todoString, function(err) {
+//       if (err) {
+//         console.log("Error writing to file:", err);
+//       } else {
+//         console.log("File has been written successfully");
+//       }
+//     });
+//   });
+
+// program.parse(process.argv);
+
