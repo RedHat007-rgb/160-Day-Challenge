@@ -14,11 +14,13 @@ program.command('todo')
   .argument('[description]', 'Description of the todo', '')
   .argument('<done>', 'Done status of the todo')
   .action((file, title, description, done) => {
-    // Create the todo object
+    //
+    //Create the todo object
     const todo = {
       title: title,
       description: description,
-      done: done === 'true' // Convert string "true" to boolean true
+      done: done === 'true' 
+      // Convert string "true" to boolean true
     };
 
     // Read the existing data from the file

@@ -139,7 +139,7 @@ program.command('todo')
       done: done
     };
 
-    // Convert the todo object to a JSON string
+  // Convert the todo object to a JSON string
     const todoString = JSON.stringify(todo, null, 2); // Pretty print with 2 spaces
 
     // Write the JSON string to the file
