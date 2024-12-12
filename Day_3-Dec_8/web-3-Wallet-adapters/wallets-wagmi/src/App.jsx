@@ -1,79 +1,83 @@
-
+import { createPublicClient } from 'viem'
+import { mainnet} from 'viem/chains';
+import {http} from 'viem';
 import './App.css'
-import { QueryClient, QueryClientProvider, useQuery} from '@tanstack/react-query';
-const queryClient=new QueryClient();//global variable for all the fetches.
 
-async function getter(){
-  const data = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const response = await data.json();
-  return response;
-}
 
+
+const client = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
 
 
 function App() {
-  // const[posts,setPosts]=useState([]);
-  // // const[titles,setTitles]=useState([]);
-  // //const[error,setError]=useState();
-   
-  // async function getPosts(){
-  //   try{
-  //   const response=await fetch("https://jsnplaceholder.typicode.com/posts");
-  //   const json=await response.json();//here we can use axios library also to fetch the data.
-  //   setPosts(json); 
-  // } catch {
-  //   console.log("Url is not correct")
-  //   // setError("Url is not defined");
-  //   // console.log(error)
-  // }
 
-  // } 
-  
-  // useEffect(function (){
-  //  setInterval(function (){
-  //   getPosts();
-  //  },5000);
-  // },[])
+  async function getBalance(){
+    const res=await client.getBalance({address:"0x7a76E0eb90f96690962D67AcBC6c7631d951eff0"})
+    console.log(res);
+  }
 
-  // // useEffect(function(){//This can be used without map function to render a title in the browser.
-  // //   let newArray=[];
-  // //   for (let i=1;i<posts.length;i++){
-  // //     console.log(posts[i].title);
-  // //     newArray.push(posts[i].title);
-  // //     setTitles(newArray);
-  // // }
-  // // },[posts])
-  
+  async function getBlockNumber(){
+    const blockNumber=await client.getBlockNumber();
+    console.log(blockNumber);
+  }
+  return (
+  <div>
+    <button onClick={getBalance}>Get balance</button>
+    <button onClick={getBlockNumber}>Get bLOCK nuMBER</button>
+  </div>
 
-  return (//here we are converting an object to a string using stringify
-    <QueryClientProvider client={queryClient}>
-      <Posts/>
-   </QueryClientProvider>
   )
 }
-
-function Posts(){
- 
-  const {data,isloading,error} =useQuery({queryKey:['posts'],queryFn:getter});
-  
-  if(error){
-    return <div>
-      Error while fetching..
-    </div>
-  }
-  if(isloading){
-    return <div>
-     Loading.....
-    </div>
-  }
-  if(data){
-    return <div>
-    {data.map((item) => (<div key={item.id}>{item.title}</div>))} 
-    </div> 
-  }
-}
-  
 
 
 export default App
 
+//   const [posts,setPosts]=useState([]);
+//   const [titless,setTitle]=useState([]);
+  
+//   async function getPosts(){
+//     const response= await fetch("https://jsonplaceholder.typicode.com/posts");
+    
+//     const data= await response.json();
+//     setPosts(data);
+//   }
+  // useEffect(()=>{
+  //   setTimeout(()=>{getPosts(),5000});
+  // },[]);
+  
+//   useEffect(()=>{
+//     let titles=[];
+//     for(let i=0;i<posts.length;i++){
+//       console.log(posts[i].title)
+//       titles.push(posts[i].title)
+//       setTitle(titles);
+//     }
+//     console.log(titles)
+// },[posts])
+
+
+// function Posts(){
+
+//   const {data,isloading,error}=useQuery({queryKey:["posts"],queryFn:getter})
+
+//   if(error){
+//     return <div>
+//       Error while fetching...
+//     </div>
+//   }
+
+//   if(isloading){
+//     return <div>
+//       loading.....
+//     </div>
+//   }
+
+//   if(data){
+//     return <div>
+//       {JSON.stringify(data)}
+//     </div>
+//   }
+
+// }
